@@ -1,44 +1,540 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Todoist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex items-center justify-center h-screen bg-gray-100">
-    <div class="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-        <h2 class="text-2xl font-semibold text-center text-gray-900">Sign in to Todoist</h2>
-        
-        <form class="mt-6">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" class="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your email" required>
-            </div>
+<!-- saved from url=(0062)https://app.todoist.com/auth/login?success_page=%2Fapp%2Ftoday -->
+<html dir="ltr" data-viewer-country="PK" data-cdns="https://todoist.b-cdn.net/|https://d3ptyyxy2at9ui.cloudfront.net/" data-csp-nonce="0QM2a4lsrXoGidr9j4t698mwDVrdB-7tc2ydgVrFjqQ" lang="en" class="theme_todoist"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Log in to Todoist_files/js" nonce=""></script><script async="" src="./Log in to Todoist_files/gtm.js.download" nonce=""></script><script nonce="">
+			(function(w,d,s,l,i){w[l]=w[l]||[];
+				w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+				var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+				j.async=true;
+				j.src='https://googletagmanager.com/gtm.js?id='+i+dl+'';
+				j.setAttribute('nonce','0QM2a4lsrXoGidr9j4t698mwDVrdB-7tc2ydgVrFjqQ');
+				f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayerGlobal','GTM-KW4J5DNZ');</script><script async="" src="./Log in to Todoist_files/gtm.js.download" nonce=""></script><script nonce="">
+			(function(w,d,s,l,i){w[l]=w[l]||[];
+				w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+				var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+				j.async=true;
+				j.src='https://googletagmanager.com/gtm.js?id='+i+dl+'';
+				j.setAttribute('nonce','0QM2a4lsrXoGidr9j4t698mwDVrdB-7tc2ydgVrFjqQ');
+				f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayerGlobal','GTM-KW4J5DNZ');</script><title>Log in to Todoist</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta property="og:image" content="/assets/images/f4d06c908155a53dfe72b87f5fd0927f.jpg"><meta property="og:image:secure_url" content="/assets/images/f4d06c908155a53dfe72b87f5fd0927f.jpg"><meta name="apple-itunes-app" content="app-id=572688855"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="description" content="Trusted by 35+ million people and teams, the Todoist app is the world&#39;s favorite task manager and to-do list app. Organize your work and life, finally."><script src="./Log in to Todoist_files/growsumo.min.js.download" type="text/javascript"></script><script nonce="">class CdnFailbackWatchdog {
+    TYPE_CSS = 'css'
+    TYPE_JS = 'js'
 
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" class="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your password" required>
-            </div>
+    MAX_CDN_FALLBACK = 2
+    ASSET_TIMEOUT = 15 * 1000 // 15 seconds
+    SEARCH_PARAM = 'cdn_fallback'
 
-            <button type="submit" class="w-full px-4 py-2 mt-6 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600">Sign In</button>
-        </form>
+    constructor(console) {
+        this.console = console
+        this.isReloading = false
+        this.tracked = 0
+        this.timeout = null
 
-        <div class="mt-4 text-center">
-            <p class="text-sm text-gray-600">Or sign in with:</p>
-            <div class="flex justify-center gap-4 mt-2">
-                <button class="flex items-center gap-2 px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                    <img src="/images/google-logo-9808.png" alt="Google Logo" class="w-5 h-5">
-                    Google
-                </button>
-                <button class="flex items-center gap-2 px-4 py-2 font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" alt="Facebook Logo" class="w-5 h-5">
-                    Facebook
-                </button>
-            </div>
-        </div>
+        this.successes = []
+        this.failures = []
+        this.params = new URLSearchParams(window.location.search)
+        this.jsFilesCnt = 0
+        this.cssFilesCnt = 0
+        this.cdns = null
+        this.cdn = ''
 
-        <p class="mt-4 text-sm text-center text-gray-600">Don't have an account? <a href="#" class="text-red-500 hover:underline">Sign up</a></p>
-    </div>
-</body>
-</html>
+        this.console.log('[watchdog] init')
+    }
+
+    saveLastTriedCDN(value) {
+        // store in localStorage a value 'x', otherwise log that it was not possible
+        try {
+            this.console.log('[watchdog] saving last tried CDN: ' + value)
+            localStorage.setItem('td-cdn', value)
+            localStorage.setItem('td-cdn-ttl', Date.now() + 1000 * 60 * 60 * 24 * 30) // 30 days
+        } catch (e) {
+            this.console.log('[watchdog] failed to save working CDN in localStorage')
+        }
+    }
+
+    getLastTriedCDN() {
+        const value = localStorage.getItem('td-cdn')
+        const ttl = localStorage.getItem('td-cdn-ttl')
+
+        if (value && ttl && parseInt(ttl, 10) > Date.now()) {
+            this.console.log('[watchdog] retrieving last tried CDN: ' + value)
+            return value
+        }
+
+        this.clearLastTriedCDN()
+        return null
+    }
+
+    clearLastTriedCDN() {
+        try {
+            this.console.log('[watchdog] clearing last tried CDN')
+            localStorage.removeItem('td-cdn')
+            localStorage.removeItem('td-cdn-ttl')
+        } catch (e) {
+            this.console.log('[watchdog] failed to clear working CDN in localStorage')
+        }
+    }
+
+    getCdns() {
+        if (this.cdns == null) {
+            const cdnsStr =
+                (document &&
+                    document.documentElement &&
+                    document.documentElement.getAttribute('data-cdns')) ||
+                '/'
+            this.cdns = cdnsStr.split('|')
+        }
+
+        return this.cdns
+    }
+
+    selectCDN() {
+        if (this.cdn) {
+            this.console.log('[watchdog] using CDN from cache: ' + this.cdn)
+            return this.cdn
+        }
+
+        const cdns = this.getCdns()
+
+        // Check if we have a cached CDN
+        // If we can't access it, use the last CDN in the list
+        let lastTriedCDN
+        try {
+            lastTriedCDN = this.getLastTriedCDN()
+        } catch (e) {
+            this.console.log('[watchdog] failed to get last tried CDN')
+            this.cdn = cdns[cdns.length - 1]
+            return this.cdn
+        }
+
+        // If the cached CDN is not in the list, clear it
+        if (lastTriedCDN && !cdns.includes(lastTriedCDN)) {
+            lastTriedCDN = null
+            this.clearLastTriedCDN()
+        }
+
+        // If we have a cached CDN, use it
+        // Otherwise, use the current load attempt to get the CDN
+        if (lastTriedCDN) {
+            this.cdn = lastTriedCDN
+        } else {
+            const loadAttempt = this.getLoadAttempt()
+            const cdnIndex = Math.min(loadAttempt, cdns.length - 1)
+
+            this.cdn = cdns[cdnIndex]
+        }
+
+        // ensure CDN always end in trailing /
+        if (!this.cdn.endsWith('/')) {
+            this.cdn += '/'
+        }
+
+        this.saveLastTriedCDN(this.cdn)
+        return this.cdn
+    }
+
+    getLoadAttempt() {
+        const cdnFallback = this.params.get(this.SEARCH_PARAM)
+        return (cdnFallback && parseInt(cdnFallback, 10)) || 0
+    }
+
+    track(assetType) {
+        this.tracked += 1
+
+        if (assetType === this.TYPE_JS) {
+            this.jsFilesCnt += 1
+        } else if (assetType === this.TYPE_CSS) {
+            this.cssFilesCnt += 1
+        }
+
+        if (this.timeout != null) {
+            clearTimeout(this.timeout)
+            this.timeout = null
+        }
+
+        this.timeout = setTimeout(this.reloadIfIssue.bind(this, true), this.ASSET_TIMEOUT)
+    }
+
+    parse(element) {
+        element.onload = null
+        element.onerror = null
+
+        if (element) {
+            if (element.href && element.rel && element.rel === 'stylesheet') {
+                return {
+                    src: element.href,
+                    type: this.TYPE_CSS,
+                }
+            }
+
+            if (element.src && element.nodeName.toLowerCase() === 'script') {
+                return {
+                    src: element.src,
+                    type: this.TYPE_JS,
+                }
+            }
+        }
+
+        return null
+    }
+
+    ok(element) {
+        const parsedAsset = this.parse(element)
+
+        if (parsedAsset) {
+            this.successes.push(parsedAsset)
+            this.reloadIfIssue()
+        }
+    }
+
+    err(element) {
+        const parsedAsset = this.parse(element)
+
+        if (parsedAsset) {
+            this.failures.push({
+                ...parsedAsset,
+                reason: 'Failed to load from CDN',
+            })
+            this.reloadIfIssue()
+        }
+    }
+
+    haveAssetsLoaded(ignoreTracking = false) {
+        if (ignoreTracking) {
+            this.console.warn(
+                `Ignoring asset checks, because something timed out. Tracked: ${this.tracked}; Successes: ${this.successes.length}; Failures: ${this.failures.length}`,
+            )
+
+            return false
+        }
+
+        if (this.tracked > this.successes.length + this.failures.length) {
+            return null
+        }
+
+        if (this.timeout != null) {
+            this.console.log(
+                `[watchdog] All assets have reported back; successes: ${this.successes.length}; failures: ${this.failures.length}`,
+            )
+            clearTimeout(this.timeout)
+            this.timeout = null
+        }
+
+        if (this.failures.length > 0) {
+            this.logFailures()
+
+            return false
+        }
+
+        const anySuccessfulCss =
+            this.cssFilesCnt == 0 ||
+            this.successes.findIndex((asset) => asset.type === this.TYPE_CSS) > -1
+
+        const anySuccessfulJS =
+            this.jsFilesCnt == 0 ||
+            this.successes.findIndex((asset) => asset.type === this.TYPE_JS) > -1
+
+        if (anySuccessfulCss && anySuccessfulJS) {
+            return true
+        }
+
+        this.console.warn(
+            `CSS or JS is missing from loaded assets; CSS: ${anySuccessfulCss}; JS: ${anySuccessfulJS}`,
+        )
+
+        return false
+    }
+
+    showTroubleLoading() {
+        try {
+            document.querySelector('.cdn-failback-error').classList.add('cdn-failback-error--show')
+        } catch (e) {
+            // do nothing
+        }
+    }
+
+    logFailures() {
+        this.console.group('The following assets had issues loading:')
+        const messages = this.failures.map((asset) => `${asset.src}: ${asset.reason}`)
+
+        messages.forEach((msg) => this.console.warn(msg))
+        this.console.groupEnd()
+    }
+
+    reloadIfIssue(ignoreTracking = false) {
+        const result = this.haveAssetsLoaded(ignoreTracking)
+
+        if (result === null || result === true) {
+            return
+        }
+
+        if (result === false) {
+            // ensures next attempt won't use the same CDN, as failed this time.
+            this.clearLastTriedCDN()
+        }
+
+        if (this.isReloading) {
+            this.console.warn(
+                '[RELOAD] Detected more issues loading assets, but we are already preparing to reload so no need to do anything',
+            )
+            return
+        }
+
+        if (window.navigator.onLine === false) {
+            this.console.warn("[RELOAD] Need to reload, but not online; won't try reloading")
+            this.showTroubleLoading()
+            return
+        }
+
+        const cdnFallback = this.getLoadAttempt() + 1
+        const maxCdnFallback = Math.min(this.getCdns().length, this.MAX_CDN_FALLBACK)
+
+        if (cdnFallback > maxCdnFallback) {
+            this.console.warn("[RELOAD] Hit maximum reload attempts, won't try reloading anymore")
+            this.showTroubleLoading()
+            return
+        }
+
+        let timeoutId = null
+        this.isReloading = true
+
+        const reloadClient = () => {
+            this.params.set(this.SEARCH_PARAM, cdnFallback)
+            this.console.warn('[RELOAD] Reloading client with URL: ' + this.params.toString())
+            window.clearTimeout(timeoutId)
+            window.location.search = this.params.toString()
+        }
+
+        timeoutId = window.setTimeout(
+            reloadClient.bind(this),
+            5 * 1000, // 5 seconds
+        )
+
+        this.cleanupServiceWorkers().then(reloadClient).catch(reloadClient)
+    }
+
+    cleanupServiceWorkers() {
+        const cleanupPromises = []
+
+        if ('serviceWorker' in navigator && window && window.caches != null) {
+            cleanupPromises.push(
+                new Promise((resolve) => {
+                    window.caches
+                        .keys()
+                        .then((cacheKeys) =>
+                            Promise.all(
+                                cacheKeys.map((cacheKey) => window.caches.delete(cacheKey)),
+                            ),
+                        )
+                        .then(() => {
+                            this.console.warn('[RELOAD] Removed all Service Worker caches')
+                            resolve()
+                        })
+                        .catch((t) => {
+                            this.console.warn(
+                                '[RELOAD] Service worker cache keys could not be removed: ' +
+                                    t.message,
+                            ),
+                                resolve()
+                        })
+                }),
+            )
+        }
+
+        // unregister service worker
+        cleanupPromises.push(
+            new Promise((resolve) => {
+                navigator.serviceWorker
+                    .getRegistration('/app/service-worker.js')
+                    .then((swReg) => {
+                        if (swReg) {
+                            swReg
+                                .unregister()
+                                .then(() => {
+                                    this.console.warn('[RELOAD] Service worker unregistered')
+                                    resolve()
+                                })
+                                .catch((t) => {
+                                    this.console.warn(
+                                        '[RELOAD] Service worker could not be unregistered: ' +
+                                            t.message,
+                                    )
+                                    resolve()
+                                })
+                        } else {
+                            resolve()
+                        }
+                    })
+                    .catch((e) => {
+                        this.console.warn(
+                            '[RELOAD] Service worker could not be unregistered: ' + e.message,
+                        )
+                        resolve()
+                    })
+            }),
+        )
+
+        return Promise.all(cleanupPromises)
+    }
+}
+
+function getPathnameFromAsset(asset) {
+    if (asset.startsWith('/')) {
+        return asset.slice(1)
+    }
+    try {
+        return new URL(asset).pathname.slice(1)
+    } catch {
+        return asset
+    }
+}
+
+function cdnLoadScript(tagName = 'head') {
+    return (asset) => {
+        window.watchdog.track('js')
+        const scriptE = document.createElement('script')
+        scriptE.onload = () => {
+            window.watchdog.ok(scriptE)
+        }
+        scriptE.onerror = () => {
+            window.watchdog.err(scriptE)
+        }
+
+        scriptE.src = window.watchdog.cdn + getPathnameFromAsset(asset)
+        scriptE.async = false
+        scriptE.crossOrigin = 'anonymous'
+        scriptE.nonce = document.documentElement.getAttribute('data-csp-nonce') || 'unknown-nonce'
+        document.getElementsByTagName(tagName)[0].appendChild(scriptE)
+    }
+}
+
+function cdnLoadLink(tagName = 'head') {
+    return (asset) => {
+        window.watchdog.track('css')
+        const linkE = document.createElement('link')
+        linkE.onload = () => {
+            window.watchdog.ok(linkE)
+        }
+        linkE.onerror = () => {
+            window.watchdog.err(linkE)
+        }
+
+        linkE.href = window.watchdog.cdn + getPathnameFromAsset(asset)
+        linkE.async = false
+        linkE.crossOrigin = 'anonymous'
+        linkE.rel = 'stylesheet'
+        linkE.nonce = document.documentElement.getAttribute('data-csp-nonce') || 'unknown-nonce'
+        document.getElementsByTagName(tagName)[0].appendChild(linkE)
+    }
+}
+
+window.watchdog = new CdnFailbackWatchdog(window.console)
+window.watchdog.selectCDN()
+
+window.cdnLoadScript = cdnLoadScript
+window.cdnLoadLink = cdnLoadLink</script><script nonce="">cdnLoadScript()("init-theme.dceed0c27488f5bed007f9777073f2b3.js");
+            
+                cdnLoadScript()("check-unsupported-browser.2d221e08c0ef7e1a59b49e59d146a4cf.js");
+            
+                cdnLoadScript()("/assets/runtime.23dd5489da5707c1fcc9bad7e1bd7c96.js");</script><script src="./Log in to Todoist_files/init-theme.dceed0c27488f5bed007f9777073f2b3.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/check-unsupported-browser.2d221e08c0ef7e1a59b49e59d146a4cf.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/runtime.23dd5489da5707c1fcc9bad7e1bd7c96.js.download" crossorigin="anonymous"></script><script nonce="">cdnLoadLink()("/assets/vendors~authentication~app~add~electron-login~template-preview~permission-request.a90886c976ee2543d12b535eb4e628ed.css");
+            
+                cdnLoadLink()("/assets/9002.f780b7bb611f0a7274c40e347eac57e2.css");
+            
+                cdnLoadLink()("/assets/authentication.a6e6ccfdaafc2bd83c7321c04257c2c8.css");</script><link href="./Log in to Todoist_files/vendors~authentication~app~add~electron-login~template-preview~permission-request.a90886c976ee2543d12b535eb4e628ed.css" crossorigin="anonymous" rel="stylesheet"><link href="./Log in to Todoist_files/9002.f780b7bb611f0a7274c40e347eac57e2.css" crossorigin="anonymous" rel="stylesheet"><link href="./Log in to Todoist_files/authentication.a6e6ccfdaafc2bd83c7321c04257c2c8.css" crossorigin="anonymous" rel="stylesheet"><script async="" src="./Log in to Todoist_files/analytics.js.download"></script><style>body {
+                margin: 0;
+            }
+
+            .cdn-failback-error {
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                height: calc(100% - 36px);
+                width: calc(100% - 36px);
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Apple Color Emoji', Helvetica, Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+                padding: 18px;
+                background-color: white;
+                z-index: 1;
+            }
+            .cdn-failback-error h1 {
+                font-size: 24px;
+            }
+            .cdn-failback-error p {
+                font-size: 16px;
+            }
+            .cdn-failback-error p a {
+                color: #d1453b !important;
+            }
+
+            .cdn-failback-error.cdn-failback-error--show {
+                display: flex;
+            }
+
+            .loading_screen {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+            }
+
+            .loading_screen--loader {
+                max-width: 500px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .loading_screen--logo {
+                margin-bottom: 32px;
+            }
+
+            .loading_screen--spinner {
+                animation-name: circular-spinner;
+                animation-duration: 1.2s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+
+            @keyframes circular-spinner {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }</style><script nonce="">(function() {var gs = document.createElement('script');gs.src = 'https://snippet.growsumo.com/growsumo.min.js';gs.type = 'text/javascript';gs.onload = gs.onreadystatechange = function() {var rs = this.readyState;if (rs && rs != 'complete' && rs != 'loaded') return;try {growsumo._initialize('pk_rDMZqNvboCKesX6lY2ygRCpejMI00Ull');if (typeof(growsumoInit) === 'function') {growsumoInit();}} catch (e) {}};var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gs, s);})();</script><meta name="apple-mobile-web-app-title" content="Todoist"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#fcfaf8"><link rel="apple-touch-startup-image" sizes="1024x1024" href="https://app.todoist.com/app/manifest_icons/icon_1024x1024.098d1a14e2f871db82d8a2392d59b587.png"><link rel="apple-touch-icon" sizes="1024x1024" href="https://app.todoist.com/app/manifest_icons/icon_1024x1024.098d1a14e2f871db82d8a2392d59b587.png"><link rel="apple-touch-icon" sizes="180x180" href="https://app.todoist.com/app/manifest_icons/icon_180x180.d0c3ef3c6be29a9ca57ead5171bbebc4.png"><link rel="apple-touch-icon" sizes="167x167" href="https://app.todoist.com/app/manifest_icons/icon_167x167.3a26fccf02024d9e908aa61a168c04b6.png"><link rel="apple-touch-icon" sizes="152x152" href="https://app.todoist.com/app/manifest_icons/icon_152x152.749dc17e04c34f6e3ade0c6ec90a827c.png"><link rel="apple-touch-icon" sizes="120x120" href="https://app.todoist.com/app/manifest_icons/icon_120x120.4a19b1dbc4514d6e3e3929c28f912cc8.png"><link rel="manifest" href="https://app.todoist.com/app/manifest.48149c9f0c601e29a9554640f7bf5b4d.json"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/4567.9df7f883bad4a6729c103b680f59f6e9.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/2311.ed11c088b70149f6ffe2add50706fa26.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/757.19dbf503627383cc9124274b483cfe5e.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/854.124701ad49874b49580cbe6e52986332.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/4818.3d91ea6cd70765d850aeca0b7e67a254.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/3661.e840625b5dd77574350bacfc80d15604.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/6037.c674bf671d091a352db8bc797ec48e38.css"><link rel="stylesheet" type="text/css" href="./Log in to Todoist_files/738.b8dca54672ff837023f357f62a11e6d4.css"></head><body><noscript>
+			<iframe src="https://googletagmanager.com/ns.html?id=GTM-KW4J5DNZ"
+				height="0" width="0" style="display:none;visibility:hidden" id="tag-manager"></iframe></noscript><noscript>
+			<iframe src="https://googletagmanager.com/ns.html?id=GTM-KW4J5DNZ"
+				height="0" width="0" style="display:none;visibility:hidden" id="tag-manager"></iframe></noscript><div class="cdn-failback-error"><svg class="loading_screen--logo" width="64" height="64" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path class="logo_bg" d="M56.000016 0h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V8c0-4.4-3.6-8-8-8" fill="#E44332"></path><g class="logo_stripe" fill="#FFF"><path d="M13.672368 29.985936c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32016.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path><path d="M13.672368 40.76952c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path><path d="M13.672368 51.55312c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path></g></g></svg><h1>Todoist couldn't load the required files.</h1><p>Please check your network connection, or <a href="https://todoist.com/contact">contact support</a> if the problem persists.</p></div><div id="loading" class="loading_screen" role="progressbar" style="display: none;"><div class="loading_screen--loader"><svg class="loading_screen--logo" width="64" height="64" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path class="logo_bg" d="M56.000016 0h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V8c0-4.4-3.6-8-8-8" fill="#E44332"></path><g class="logo_stripe" fill="#FFF"><path d="M13.672368 29.985936c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32016.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path><path d="M13.672368 40.76952c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path><path d="M13.672368 51.55312c1.1304-.65152 25.34368-14.58496 25.89952-14.90592.5544-.32.58224-1.30224-.03824-1.65632-.62096-.35408-1.79984-1.02368-2.23856-1.28048-.44656-.26048-1.24976-.40528-1.99472.02384-.30928.1784-21.00256 12.0768-21.69424
+                        12.46992-.82784.47072-1.85248.4768-2.67744-.0008-.65152-.37696-10.92864-6.3488-10.92864-6.3488v5.39712c2.66016 1.54912 9.2744 5.40128 10.87744 6.30624.95664.54016 1.87232.52688 2.79488-.0048"></path></g></g></svg> <svg class="loading_screen--spinner" width="24" height="24" viewBox="0 0 24 24"><g fill="none" fill-rule="nonzero"><path class="ring_thumb" fill="#E44331" d="M17.945 3.958A9.955 9.955 0 0 0 12 2c-2.19 0-4.217.705-5.865 1.9L5.131 2.16A11.945 11.945 0 0 1 12 0c2.59 0 4.99.82 6.95 2.217l-1.005 1.741z"></path><path class="ring_track" fill="#FCECEA" d="M5.13 2.16L6.136 3.9A9.987 9.987 0 0 0 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10a9.986 9.986 0 0 0-4.055-8.042l1.006-1.741A11.985 11.985 0 0 1 24 12c0 6.627-5.373 12-12 12S0 18.627 0 12c0-4.073 2.029-7.671 5.13-9.84z"></path></g></svg></div></div><div id="todoist_app"><div class="NQUzMNz fb8d74bb _14423c92 d3229ba4 e47c5a43 fbd4ce29 _76ab968c _5f8879d9 b4e05554 ac28a3b1 _75ca308a"><div class="fb8d74bb _14423c92 _2d7320f2 _168a8ff8 _2caef228"><div class="fb8d74bb _14423c92 b75f86cd _423a3b1a _5f8879d9 _6eb365d1"><a href="https://todoist.com/" aria-label="Todoist Homepage"><div class="fb8d74bb _3da48ad6 _0daac9f2 _4fd4b789 _5f8879d9"><svg xmlns="http://www.w3.org/2000/svg" width="127" height="32" fill="none" viewBox="0 0 127 32"><g clip-path="url(#todoist-extended-logo_svg__a)"><path fill="#E44232" fill-rule="evenodd" d="M3.92 0h23.947c2.195 0 3.99 1.8 3.99 4v24c0 2.2-1.795 4-3.99 4H3.919c-2.195 0-3.99-1.8-3.99-4v-5.374l.056.033a944.36 944.36 0 0 0 5.37 3.12c.477.27.934.264 1.394-.002l6.224-3.59.116-.067.003-.002.018-.01.065-.038a64473.2 64473.2 0 0 0 6.496-3.746c.276-.16.29-.651-.02-.829l-.217-.123v-.001h-.001c-.316-.18-.724-.413-.898-.516a1.016 1.016 0 0 0-.995.012c-.155.09-10.479 6.039-10.824 6.235a1.343 1.343 0 0 1-1.336 0l-5.452-3.175v-2.693l.057.033c1.362.795 4.581 2.674 5.37 3.12.477.27.934.264 1.394-.002l6.353-3.664.024-.014.004-.002c3.188-1.84 6.4-3.691 6.54-3.773.277-.16.291-.651-.019-.828l-.217-.124c-.315-.18-.725-.414-.9-.517a1.016 1.016 0 0 0-.994.012c-.155.09-10.479 6.039-10.824 6.235a1.343 1.343 0 0 1-1.336 0l-5.452-3.175v-2.693l.056.033c1.361.795 4.582 2.674 5.37 3.12.478.27.935.264 1.395-.002l6.36-3.668.008-.005h.002l.08-.047L19.67 7.54c.276-.16.29-.65-.02-.828l-.217-.124c-.316-.18-.725-.414-.9-.516a1.016 1.016 0 0 0-.994.012c-.155.089-10.479 6.038-10.824 6.235a1.343 1.343 0 0 1-1.336 0L-.072 9.143V4c0-2.2 1.796-4 3.991-4Z" clip-rule="evenodd"></path><path fill="#fff" d="m6.749 14.993 6.36-3.668.008-.005c3.192-1.84 6.412-3.698 6.553-3.78.277-.16.29-.65-.019-.828l-.217-.124c-.316-.18-.725-.414-.9-.516a1.016 1.016 0 0 0-.995.012c-.154.089-10.478 6.038-10.823 6.235a1.343 1.343 0 0 1-1.336 0L-.072 9.143v2.698l.056.033c1.361.795 4.582 2.674 5.37 3.12.478.27.935.264 1.395-.002Z"></path><path fill="#fff" d="m6.749 20.385 6.352-3.664.024-.014 6.545-3.775c.277-.16.29-.651-.019-.828l-.217-.124c-.316-.18-.725-.414-.9-.517a1.016 1.016 0 0 0-.995.012c-.154.09-10.478 6.039-10.823 6.235a1.343 1.343 0 0 1-1.336 0l-5.452-3.175v2.699l.057.033c1.362.795 4.581 2.674 5.37 3.12.477.27.934.264 1.394-.002Z"></path><path fill="#fff" d="m13.11 22.108-6.361 3.669c-.46.265-.917.272-1.394.002a944.524 944.524 0 0 1-5.37-3.12l-.057-.033v-2.699l5.452 3.175c.412.239.923.235 1.336 0 .345-.196 10.669-6.146 10.823-6.235.372-.214.773-.142.995-.012.175.103.584.336.9.517l.217.123c.31.178.296.669.02.829l-6.561 3.784Z"></path><path fill="#E44232" fill-rule="evenodd" d="M55.528 19.082c0 .515.088 1.015.263 1.492.175.481.431.904.773 1.273.34.369.75.664 1.228.884.478.22 1.021.331 1.627.331.607 0 1.15-.11 1.628-.33a3.85 3.85 0 0 0 1.228-.885 3.77 3.77 0 0 0 .772-1.273c.173-.477.26-.977.26-1.492s-.087-1.015-.26-1.494a3.78 3.78 0 0 0-.772-1.271 3.855 3.855 0 0 0-1.228-.885 3.85 3.85 0 0 0-1.628-.333c-.606 0-1.15.113-1.627.333a3.85 3.85 0 0 0-1.229.885 3.74 3.74 0 0 0-.772 1.27c-.175.48-.263.98-.263 1.495Zm-3.309 0c0-1.051.189-2.005.566-2.862a6.665 6.665 0 0 1 1.531-2.198 6.762 6.762 0 0 1 2.288-1.411 7.967 7.967 0 0 1 2.815-.498c.992 0 1.931.167 2.813.498a6.793 6.793 0 0 1 2.29 1.41 6.69 6.69 0 0 1 1.531 2.199c.377.857.566 1.81.566 2.862 0 1.05-.189 2.005-.566 2.862a6.69 6.69 0 0 1-1.53 2.198 6.749 6.749 0 0 1-2.29 1.409 7.9 7.9 0 0 1-2.814.497c-.994 0-1.93-.164-2.815-.497a6.718 6.718 0 0 1-2.288-1.409 6.664 6.664 0 0 1-1.53-2.198c-.378-.857-.567-1.811-.567-2.862ZM71.472 19.085c0 .516.087 1.015.263 1.492.175.482.43.905.772 1.274.34.369.75.663 1.228.884.478.22 1.021.33 1.627.33.607 0 1.15-.11 1.628-.33a3.763 3.763 0 0 0 2-2.158c.173-.477.26-.976.26-1.491 0-.516-.087-1.015-.26-1.495a3.775 3.775 0 0 0-2-2.155 3.849 3.849 0 0 0-1.627-.333 3.85 3.85 0 0 0-1.628.333 3.85 3.85 0 0 0-1.228.884c-.341.37-.597.792-.773 1.271-.175.48-.262.98-.262 1.494Zm7.835 4.644h-.056c-.479.813-1.12 1.402-1.93 1.771a6.266 6.266 0 0 1-2.62.552c-1.031 0-1.945-.178-2.747-.538a6.15 6.15 0 0 1-2.054-1.48 6.312 6.312 0 0 1-1.297-2.213 8.278 8.278 0 0 1-.44-2.736c0-.976.154-1.89.469-2.738a6.815 6.815 0 0 1 1.309-2.212 6.065 6.065 0 0 1 2.027-1.478 6.194 6.194 0 0 1 2.593-.54c.626 0 1.178.065 1.657.193.478.13.9.295 1.268.5a4.81 4.81 0 0 1 1.572 1.325h.083v-7.31c0-.332.262-.722.722-.722h1.87c.432 0 .72.364.72.721v18.174c0 .461-.391.723-.72.723H80.03a.731.731 0 0 1-.723-.722v-1.27ZM87.963 19.082c0 .515.088 1.015.263 1.492.175.481.431.904.773 1.273.34.369.75.664 1.228.884.478.22 1.021.331 1.627.331.606 0 1.15-.11 1.628-.33a3.765 3.765 0 0 0 2-2.158c.173-.477.26-.977.26-1.492s-.087-1.015-.26-1.494a3.776 3.776 0 0 0-.772-1.271 3.851 3.851 0 0 0-1.228-.885 3.85 3.85 0 0 0-1.628-.333c-.606 0-1.15.113-1.627.333-.478.221-.887.516-1.228.885-.342.369-.598.791-.773 1.27-.175.48-.263.98-.263 1.495Zm-3.309 0c0-1.051.189-2.005.566-2.862a6.663 6.663 0 0 1 1.531-2.198 6.763 6.763 0 0 1 2.288-1.411 7.966 7.966 0 0 1 2.815-.498c.993 0 1.931.167 2.813.498a6.794 6.794 0 0 1 2.29 1.41 6.69 6.69 0 0 1 1.532 2.199c.376.857.566 1.81.566 2.862 0 1.05-.19 2.005-.567 2.862a6.689 6.689 0 0 1-1.53 2.198 6.75 6.75 0 0 1-2.29 1.409 7.901 7.901 0 0 1-2.814.497c-.994 0-1.93-.164-2.815-.497a6.719 6.719 0 0 1-2.288-1.409 6.663 6.663 0 0 1-1.53-2.198c-.378-.857-.567-1.811-.567-2.862ZM100.723 7.94c0-.536.197-1 .592-1.398.398-.396.899-.594 1.505-.594.606 0 1.118.19 1.531.568.413.377.622.852.622 1.424 0 .571-.209 1.046-.622 1.424-.413.378-.925.567-1.531.567-.606 0-1.107-.198-1.505-.596-.395-.396-.592-.86-.592-1.395ZM114.388 16.123c-.33 0-.573-.25-.615-.36-.275-.723-1.152-.994-1.86-.994-1.117 0-1.993.518-1.993 1.41 0 .863.848 1.04 1.372 1.198.575.175 1.673.415 2.278.557a7.379 7.379 0 0 1 1.725.637c1.757.915 2.008 2.353 2.008 3.22 0 3.196-3.161 4.257-5.355 4.257-1.691 0-4.868-.257-5.566-3.488-.068-.315.21-.798.72-.798h1.828c.36 0 .602.263.672.47.235.649.982 1.139 2.24 1.139 1.351 0 2.149-.537 2.149-1.25 0-.462-.261-.872-.602-1.104-1.024-.696-3.556-.775-4.931-1.508-.526-.28-1.848-.922-1.848-3.11 0-3.014 2.735-4.286 5.137-4.286 3.544 0 4.844 2.244 4.991 3.076.081.459-.176.934-.691.934h-1.659ZM117.573 14.48v-1.372c0-.328.258-.721.716-.721h1.765v-3.37c0-.36.244-.58.429-.66.109-.049 1.097-.48 1.885-.825.551-.227.997.228.997.666v4.189h2.922c.451 0 .72.395.72.721v1.374a.744.744 0 0 1-.72.724h-2.922v5.807c0 .664-.018 1.182.235 1.566.232.351.572.481 1.254.481.196 0 .37-.032.518-.083a.703.703 0 0 1 .865.318c.216.418.463.877.635 1.206.19.361.038.824-.31.993-.56.273-1.336.494-2.4.494-.883 0-1.383-.097-1.941-.29a3.346 3.346 0 0 1-1.415-1c-.323-.396-.483-.926-.602-1.516-.121-.59-.15-1.305-.15-2.08v-5.896h-1.761c-.462 0-.72-.4-.72-.726ZM41.836 14.48v-1.372c0-.328.258-.721.715-.721h2.017v-3.37c0-.36.244-.58.429-.66l1.885-.825c.551-.227.997.228.997.666v4.189h2.922c.451 0 .72.395.72.721v1.374a.745.745 0 0 1-.72.724H47.88v5.807c0 .664-.018 1.182.235 1.566.232.351.572.481 1.254.481.196 0 .37-.032.518-.083a.704.704 0 0 1 .865.318c.216.418.463.877.636 1.206.19.361.037.824-.31.993-.561.273-1.337.494-2.401.494-.883 0-1.382-.097-1.941-.29a3.343 3.343 0 0 1-1.414-1c-.324-.396-.484-.926-.603-1.516-.121-.59-.15-1.305-.15-2.08v-5.896h-2.012c-.462 0-.72-.4-.72-.726ZM101.891 25.72h1.871c.396 0 .72-.324.72-.72V13.107a.723.723 0 0 0-.72-.722h-1.871a.723.723 0 0 0-.72.722V25c0 .397.324.722.72.722Z" clip-rule="evenodd"></path></g><defs><clippath id="todoist-extended-logo_svg__a"><path fill="#fff" d="M0 0h127v32H0z"></path></clippath></defs></svg></div><div class="fb8d74bb _64dcc902 _4f7a886f _2ffa0d03 _5f8879d9"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32"><path fill="#E44232" fill-rule="evenodd" d="M4 0h24c2.2 0 4 1.8 4 4v24c0 2.2-1.8 4-4 4H4c-2.2 0-4-1.8-4-4v-5.374l.057.033c1.365.794 4.592 2.674 5.382 3.12.478.27.936.263 1.397-.003l6.328-3.641.012-.007.035-.02 6.575-3.784c.277-.16.291-.652-.02-.829l-.217-.124c-.316-.18-.726-.413-.901-.516a1.02 1.02 0 0 0-.998.012c-.154.09-10.5 6.038-10.847 6.235a1.349 1.349 0 0 1-1.338 0L0 19.927v-2.693l.057.033c1.365.795 4.592 2.674 5.382 3.12.478.27.936.264 1.397-.002.276-.16 3.307-1.903 6.367-3.664l.024-.014 6.559-3.775c.277-.16.291-.651-.02-.828l-.217-.124c-.316-.18-.726-.414-.901-.517a1.02 1.02 0 0 0-.998.012c-.154.09-10.5 6.039-10.847 6.235a1.349 1.349 0 0 1-1.338 0L0 14.535v-2.693l.056.033a943.17 943.17 0 0 0 5.383 3.12c.478.27.936.264 1.397-.002l6.374-3.668.008-.005c3.2-1.84 6.426-3.698 6.568-3.78.277-.16.291-.65-.02-.828l-.217-.124c-.317-.18-.727-.414-.901-.516a1.02 1.02 0 0 0-.998.012c-.154.089-10.5 6.038-10.847 6.235a1.349 1.349 0 0 1-1.338 0L0 9.143V4c0-2.2 1.8-4 4-4Z" clip-rule="evenodd"></path><path fill="#fff" d="M6.836 14.993c.276-.16 3.311-1.906 6.374-3.668l.008-.005c3.2-1.84 6.426-3.698 6.568-3.78.277-.16.29-.65-.02-.828l-.217-.124c-.316-.18-.727-.414-.902-.516a1.02 1.02 0 0 0-.997.012c-.155.089-10.501 6.038-10.847 6.235a1.349 1.349 0 0 1-1.339 0L0 9.143v2.698l.056.033a877.38 877.38 0 0 0 5.383 3.12c.478.27.936.264 1.397-.002Z"></path><path fill="#fff" d="m6.836 20.385 6.366-3.664.024-.014 6.56-3.775c.277-.16.29-.651-.02-.828l-.217-.124c-.316-.18-.727-.414-.902-.517a1.02 1.02 0 0 0-.997.012c-.155.09-10.501 6.039-10.847 6.235a1.349 1.349 0 0 1-1.339 0L0 14.535v2.699l.057.033c1.365.795 4.591 2.674 5.382 3.12.478.27.936.264 1.397-.002Z"></path><path fill="#fff" d="m13.21 22.108-6.374 3.668c-.461.266-.919.273-1.397.003-.79-.446-4.018-2.326-5.382-3.12L0 22.626v-2.699l5.464 3.175c.413.238.925.235 1.339 0 .346-.197 10.692-6.146 10.847-6.235a1.02 1.02 0 0 1 .997-.012c.175.103.586.336.902.516l.218.124c.31.177.296.669.019.829l-6.575 3.784Z"></path></svg></div></a></div><div class="eae3d34f _0703e67f fb8d74bb _14423c92 _1d226e27 c6eb8f43 _5f8879d9 _7cc6458c a65d9c55 _43e5f8e9 _168a8ff8 _56a651f6" style="align-items: stretch;"><div class="_9dd31975 fb8d74bb _68ab48ca c3b69d70 _75ca308a"><div class="fb8d74bb bd023b96"><div class="KWxDPo2 fb8d74bb _14423c92 _33e3ad63 _2d7320f2 _966b120f _8c75067a"><div class="fb8d74bb"><h1 class="bff24867 _7cbdd1ba fb8d74bb">Log in</h1></div><div class="fb8d74bb c4803194 _211eebc7 b0e6eab4 cad4e2ec"></div><div class="fb8d74bb _14423c92 _2d7320f2 _43e5f8e9 _8c75067a"><a href="https://accounts.google.com/o/oauth2/auth?state=%7B%22csrf%22%3A%221cf7cb66-3e35-4c20-ac5e-b574841da3f7%22%2C%22success_page%22%3A%22%2Fapp%2Ftoday%22%2C%22pkce_oauth%22%3Anull%2C%22platform%22%3Anull%2C%22connect%22%3Afalse%7D&amp;scope=email+profile&amp;client_id=600979030768-7o35cjq1gv138e22oj0j39u0bp0mn3hj.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fapp.todoist.com%2Fapp%2Fgoogle-redirect&amp;response_type=token&amp;apppackagename=com.todoist&amp;prompt=select_account" aria-describedby="agreement-footnote" aria-disabled="false" class="fb8d74bb _56a651f6 F9gvIPl UzLA8lZ X5UVg4_ _3930afa0 aa19cb97 _2d084671"><div aria-hidden="true" class="_380e7c73 fb8d74bb _14423c92 _5f8879d9"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="u2emSEy" aria-hidden="true"><g fill="none" fill-rule="evenodd"><path fill="#4285F4" d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z"></path><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z"></path><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z"></path><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58Z"></path><path d="M0 0h18v18H0z"></path></g></svg></div><span class="_90654824 fb8d74bb _1c09cd18 _68aab614">Continue with Google</span></a><a href="https://www.facebook.com/v16.0/dialog/oauth?state=%7B%22csrf%22%3A%221cf7cb66-3e35-4c20-ac5e-b574841da3f7%22%2C%22success_page%22%3A%22%2Fapp%2Ftoday%22%2C%22pkce_oauth%22%3Anull%2C%22platform%22%3Anull%2C%22connect%22%3Afalse%7D&amp;scope=email%2Cpublic_profile&amp;client_id=245146872273138&amp;redirect_uri=https%3A%2F%2Fapp.todoist.com%2Fapp%2Ffacebook-redirect&amp;response_type=token&amp;apppackagename=com.todoist" aria-describedby="agreement-footnote" aria-disabled="false" class="fb8d74bb _56a651f6 F9gvIPl UzLA8lZ X5UVg4_ _3930afa0 aa19cb97 _2d084671"><div aria-hidden="true" class="_380e7c73 fb8d74bb _14423c92 _5f8879d9"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 18 18" class="u2emSEy" aria-hidden="true"><mask id="facebook-icon_svg__a" width="18" height="18" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type: alpha;"><path fill="#fff" fill-rule="evenodd" d="M.001 0H18v17.89H.001V0Z" clip-rule="evenodd"></path></mask><g mask="url(#facebook-icon_svg__a)"><path fill="#1877F2" fill-rule="evenodd" d="M18 9a9 9 0 1 0-10.406 8.89v-6.288H5.309V9h2.285V7.017c0-2.255 1.343-3.501 3.4-3.501.984 0 2.014.175 2.014.175v2.215h-1.135c-1.118 0-1.467.694-1.467 1.406V9h2.496l-.399 2.602h-2.097v6.289C14.71 17.216 18 13.492 18 9Z" clip-rule="evenodd"></path></g><path fill="#fff" fill-rule="evenodd" d="m12.503 11.602.4-2.602h-2.497V7.312c0-.712.349-1.406 1.467-1.406h1.135V3.691s-1.03-.175-2.015-.175c-2.056 0-3.4 1.246-3.4 3.501V9H5.31v2.602h2.285v6.289a9.067 9.067 0 0 0 2.812 0V11.6h2.097Z" clip-rule="evenodd"></path></svg></div><span class="_90654824 fb8d74bb _1c09cd18 _68aab614">Continue with Facebook</span></a><a href="https://appleid.apple.com/auth/authorize?state=eyJjc3JmIjoiMWNmN2NiNjYtM2UzNS00YzIwLWFjNWUtYjU3NDg0MWRhM2Y3Iiwic3VjY2Vzc19wYWdlIjoiL2FwcC90b2RheSIsInBrY2Vfb2F1dGgiOm51bGwsInBsYXRmb3JtIjpudWxsLCJjb25uZWN0IjpmYWxzZX0%3D&amp;client_id=com.todoist.apple-sign-in-umbrella&amp;redirect_uri=https%3A%2F%2Fapp.todoist.com%2Fapp%2Fapple-redirect&amp;response_mode=fragment&amp;response_type=code+id_token" aria-describedby="agreement-footnote" aria-disabled="false" class="fb8d74bb _56a651f6 F9gvIPl UzLA8lZ X5UVg4_ _3930afa0 aa19cb97 _2d084671"><div aria-hidden="true" class="_380e7c73 fb8d74bb _14423c92 _5f8879d9"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" preserveAspectRatio="xMidYMid" viewBox="0 0 256 315" class="u2emSEy" aria-hidden="true"><path fill="currentColor" d="M214 167c0 48 42 63 42 64s-7 22-22 44c-13 20-26 39-48 39-21 0-28-12-52-12s-31 12-51 12c-21 1-37-20-50-39-27-39-48-111-20-159 14-24 39-39 65-39 21-1 40 13 52 13s36-16 60-14c11 0 39 4 58 31-2 1-35 20-34 60M174 50c11-13 19-32 17-50-16 1-35 11-47 24a66 66 0 0 0-16 48c17 2 35-9 46-22"></path></svg></div><span class="_90654824 fb8d74bb _1c09cd18 _68aab614">Continue with Apple</span></a></div><hr class="b6f67ff8 fb8d74bb"><form class="fb8d74bb _14423c92 _2d7320f2 _966b120f _8c75067a"><div class="fb8d74bb _14423c92 _2d7320f2 _2580a74b _8c75067a"><div class="d5ff04da _49c37b27 fb8d74bb _14423c92 _5f8879d9 b76144ce"><div class="fb8d74bb c3b69d70"><span class="fb8d74bb _14423c92 _5f8879d9 e42ffab4 _6eb365d1"><label for="element-0" class="a83bd4e0 _266d6623 fb8d74bb"><span class="af23c791">Email</span></label></span><div class="c8f65b3b _5252fd3d fb8d74bb _14423c92 _5f8879d9 b76144ce"><input placeholder="Enter your email..." autocomplete="email" id="element-0" type="email" value=""></div></div></div></div><div class="fb8d74bb _14423c92 _2d7320f2 _2580a74b _8c75067a"><div class="d5ff04da _49c37b27 fb8d74bb _14423c92 _5f8879d9 b76144ce"><div class="fb8d74bb c3b69d70"><span class="fb8d74bb _14423c92 _5f8879d9 e42ffab4 _6eb365d1"><label for="element-2" class="a83bd4e0 _266d6623 fb8d74bb"><span class="af23c791">Password</span></label></span><div class="c8f65b3b _5252fd3d fb8d74bb _14423c92 _5f8879d9 b76144ce"><input placeholder="Enter your password..." autocomplete="current-password" minlength="8" id="element-2" type="password" value=""><div class="b79b851f fb8d74bb _14423c92 _8e9bf2ee f9be90b4 _5f8879d9"><button aria-label="Toggle password visibility" type="button" aria-disabled="false" class="_3930afa0 aa19cb97 _7246d092 abd5766f"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"><g fill="gray" fill-rule="evenodd" transform="translate(2 4)"><path fill-rule="nonzero" d="M13.047 2.888C11.962 2.294 10.944 2 10 2 7.56 2 4.63 3.966 1.288 8c1.133 1.368 2.218 2.497 3.253 3.394l-.708.708c-1.068-.93-2.173-2.085-3.315-3.464a1 1 0 0 1 0-1.276C4.031 3.121 7.192 1 10 1c1.196 0 2.456.385 3.78 1.154l-.733.734zm-6.02 10.263C8.084 13.72 9.076 14 10 14c2.443 0 5.373-1.969 8.712-6-1.11-1.34-2.176-2.453-3.193-3.341l.708-.709C17.437 5.013 18.695 6.363 20 8c-3.721 4.667-7.054 7-10 7-1.175 0-2.411-.371-3.709-1.113l.735-.736z"></path><path fill-rule="nonzero" d="M8.478 11.7l.79-.79a3 3 0 0 0 3.642-3.642l.79-.79A4 4 0 0 1 8.477 11.7zM6.334 9.602a4 4 0 0 1 5.268-5.268l-.78.78A3.002 3.002 0 0 0 7.113 8.82l-.78.78z"></path><rect width="21" height="1" x="-.722" y="7.778" rx=".5" transform="rotate(-45 9.778 8.278)"></rect></g></svg></button></div></div></div></div></div><button aria-describedby="agreement-footnote" type="submit" aria-disabled="false" class="fb8d74bb _8c75067a F9gvIPl rWfXb_e _3930afa0 _7ea1378e _2d084671"><span class="_90654824 fb8d74bb _1c09cd18 _68aab614 _8c75067a">Log in</span></button></form><div class="a83bd4e0 a8d37c6e fb8d74bb"><a class="d77fcdc6 _468ce45c cdc8b08c fb8d74bb _6a38242d" href="https://app.todoist.com/auth/password?success_page=%2Fapp%2Ftoday">Forgot your password?</a></div><div id="agreement-footnote" class="a83bd4e0 a8d37c6e fb8d74bb">By continuing with Google, Apple, or Email, you agree to Todoist’s <a href="https://todoist.com/terms" target="_blank" rel="noopener noreferrer" class="d77fcdc6 _468ce45c cdc8b08c fb8d74bb _6a38242d">Terms of Service</a> and <a href="https://todoist.com/privacy" target="_blank" rel="noopener noreferrer" class="d77fcdc6 _468ce45c cdc8b08c fb8d74bb _6a38242d">Privacy Policy</a>.</div><hr class="b6f67ff8 fb8d74bb"><div class="a83bd4e0 a8d37c6e fb8d74bb _1c09cd18">Don’t have an account? <a class="d77fcdc6 _468ce45c cdc8b08c fb8d74bb _6a38242d" href="https://app.todoist.com/auth/signup?success_page=%2Fapp%2Ftoday">Sign up</a></div></div></div></div><div class="fb8d74bb _3da48ad6 _4f7a886f _4fd4b789 _5f8879d9"><div class="eC3LEjx _9dd31975 fb8d74bb _68ab48ca c3b69d70 _75ca308a"><div class="yT6uAWz fb8d74bb _14423c92 _078feb3c _4749a3bf _5f8879d9 b76144ce b4e05554 _75ca308a"><div class="OtH5yC5 fb8d74bb"><img src="./Log in to Todoist_files/44245fc51c3e2ab05ee6d92c13e2e08a.png" alt=""></div></div></div></div></div></div></div></div><script nonce="">cdnLoadScript('body')("/assets/vendors~authentication~app~add~electron-login~template-preview~permission-request.ac8d5505bd3d606a986a014e0e4d9d8d.js");
+            
+                cdnLoadScript('body')("/assets/vendors~authentication~app~add~electron-login~template-preview.5fb66d6f3d3b5fc2bd6e49b974b1109f.js");
+            
+                cdnLoadScript('body')("/assets/vendors~authentication~app~add~template-preview.39880773dceeeb28da063eee6039faaa.js");
+            
+                cdnLoadScript('body')("/assets/vendors~authentication~app.9614f63e1a89fdb1400e15433f08c0db.js");
+            
+                cdnLoadScript('body')("/assets/vendors~authentication~onboarding.3cd9de3f7522e7c2dac8aae4fed932d1.js");
+            
+                cdnLoadScript('body')("/assets/9002.87e8b58e89c21ba83efb11ebb01cdca1.js");
+            
+                cdnLoadScript('body')("/assets/3688.ef46ad0a56da87dbaacaae2f82475646.js");
+            
+                cdnLoadScript('body')("/assets/4853.4ae7b269ac67f64c34be63da523d01f2.js");
+            
+                cdnLoadScript('body')("/assets/3944.3d1f86234b6da5d2be4197d61cdf2b56.js");
+            
+                cdnLoadScript('body')("/assets/6092.2b1dfcf29bbaba97bdbb9f402685190c.js");
+            
+                cdnLoadScript('body')("/assets/authentication.7a154d1facfd8d1ea1051cd29787a4ce.js");</script><script src="./Log in to Todoist_files/vendors~authentication~app~add~electron-login~template-preview~permission-request.ac8d5505bd3d606a986a014e0e4d9d8d.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/vendors~authentication~app~add~electron-login~template-preview.5fb66d6f3d3b5fc2bd6e49b974b1109f.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/vendors~authentication~app~add~template-preview.39880773dceeeb28da063eee6039faaa.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/vendors~authentication~app.9614f63e1a89fdb1400e15433f08c0db.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/vendors~authentication~onboarding.3cd9de3f7522e7c2dac8aae4fed932d1.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/9002.87e8b58e89c21ba83efb11ebb01cdca1.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/3688.ef46ad0a56da87dbaacaae2f82475646.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/4853.4ae7b269ac67f64c34be63da523d01f2.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/3944.3d1f86234b6da5d2be4197d61cdf2b56.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/6092.2b1dfcf29bbaba97bdbb9f402685190c.js.download" crossorigin="anonymous"></script><script src="./Log in to Todoist_files/authentication.7a154d1facfd8d1ea1051cd29787a4ce.js.download" crossorigin="anonymous"></script><!-- version 7729 --><iframe allow="join-ad-interest-group" data-tagging-id="G-L1YQDZCTV5" data-load-time="1742421813145" height="0" width="0" src="./Log in to Todoist_files/rul.html" style="display: none; visibility: hidden;"></iframe><div id="id-3ksidz"><div></div></div></body></html>
