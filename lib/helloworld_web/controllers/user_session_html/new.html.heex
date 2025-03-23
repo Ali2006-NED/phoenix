@@ -33,7 +33,7 @@
     align-items: center; /* Align vertically */
     gap: 20px; 
 margin-bottom: 70px;
-margin-top: 50px;
+margin-top: 210px;
 }
 
 .logo-container img {
@@ -205,23 +205,37 @@ margin-top: 50px;
                     Continue with Apple
                 </button>
             </div>
+            <%= if @error_message do %>
+      <div class="text-red-600 text-sm text-center">
+        <%= @error_message %>
+      </div>
+      <% end %>
 
             <!-- Email & Password Fields -->
-            <div class="input-field">
-                <label>Email</label>
-                <input type="email" placeholder="Enter your email...">
-            </div>
+<.simple_form :let={f} for={@conn.params["user"]} as={:user} action={~p"/users/log_in"} class="input-field">
+  <.input field={f[:email]} type="email" label="Email" placeholder="Enter your email..." required />
 
-            <div class="input-field password-container">
-                <label>Password</label>
-                <input type="password" placeholder="Enter your password..." id="password">
-                <i class="fas fa-eye" onclick="togglePassword()"></i>
-            </div>
+  <div class="relative">
+    <.input
+      id="password-input"
+      field={f[:password]}
+      type="password"
+      label="Password"
+      placeholder="Enter your password..."
+      required
+      class="input-field password container pr-10"
+    />
+    <i
+      id="togglePassword"
+      class="fas fa-eye absolute right-3 top-11 transform cursor-pointer"
+      onclick="togglePassword()"
+    ></i>
+  </div>
 
-   
-
-            <!-- Log in Button -->
-            <button class="login-btn">Log in</button>
+  <:actions>
+    <.button class="login-btn" phx-disable-with="Logging in...">Log in</.button>
+  </:actions>
+</.simple_form>
 <a href="#" class="forgot-password">Forgot your password?</a>
 
             <p class="terms">By continuing with Google, Apple, or Email, you agree to our Terms of Service and Privacy Policy.</p>
@@ -239,14 +253,18 @@ margin-top: 50px;
 
 
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById("password");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-            } else {
-                passwordInput.type = "password";
-            }
+    function togglePassword() {
+        const passwordInput = document.getElementById("password-input");
+        const toggleIcon = document.getElementById("togglePassword");
+        
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
         }
+    }
     </script>
 
 </body>
